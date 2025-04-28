@@ -1,13 +1,27 @@
+@font-face {
+  font-family: 'Minolta'; /* Choose a name you'll use in CSS */
+  src: /* ----> Path is RELATIVE to this CSS file (index.css) <---- */
+       /* Modern browsers */
+       url('./assets/fonts/MinoltaClv1_2.ttf') format('truetype');
+
+  /* Optional: Specify font weight and style if this file is for a specific variant */
+  font-weight: normal; /* e.g., normal, bold, 400, 700 */
+  font-style: normal;  /* e.g., normal, italic */
+}
+
+/* Keep existing index.css rules below (like body, code, etc.) */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Minolta', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; /* Default CRA fonts */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Add your custom font later here or in App.css */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

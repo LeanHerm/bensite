@@ -1,38 +1,423 @@
+/* src/App.css */
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #3270f9; /* Default background */
+  color: white; /* Default text color */
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Navbar Styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  /* Change background to a solid color (e.g., the site's blue) */
+  background-color: #222222; /* CHANGED from rgba(0, 0, 0, 0.7) */
+  padding: 1rem; /* Keep padding for spacing, adjust if needed */
+  z-index: 1000;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 1.5rem; /* Adjust gap between words if needed */
+}
+
+/* --- Navbar Button Styles --- */
+.navbar button {
+  /* Remove button-specific appearance */
+  background: none; /* CHANGED - Remove background color */
+  border: none; /* CHANGED - Remove border */
+  padding: .5rem; /* CHANGED - Remove padding */
+  appearance: none; /* Helps remove native browser styling */
+
+  /* Style as plain text */
+  color: white; /* Keep text white (adjust if navbar bg changes) */
+  font-family: inherit; /* Use the site's font */
+  font-size: 1rem; /* Adjust size as needed */
+  font-weight: bold; /* Optional: make text slightly bolder */
+  cursor: pointer; /* Keep the pointer cursor */
+  transition: color 0.2s ease; /* Optional: smooth transition for hover */
+}
+
+.navbar-logo {
+  margin-right: 2rem; /* Add space between logo and nav links */
+  /* You could make it flex column if needed, but default block works */
+}
+
+.navbar-logo h1 {
+  font-size: 1.8rem; /* Make name larger */
+  color: white; /* Or your desired color */
+  margin: 0; /* Remove default heading margin */
+  line-height: 1.1; /* Adjust line height */
+  font-weight: 600; /* Example weight */
+}
+
+.navbar-logo p {
+  font-size: 0.85rem; /* Make tagline smaller */
+  color: #e0e0e0; /* Example: Slightly muted color */
+  margin: 0; /* Remove default paragraph margin */
+  line-height: 1; /* Adjust line height */
+  /* Optional styles */
+  /* text-transform: uppercase; */
+  /* letter-spacing: 0.5px; */
+}
+
+/* --- Styles for Main Nav Links Group --- */
+.navbar > div:not(.navbar-logo):not(.language-switcher) { /* Target the div holding the buttons */
+   display: flex;
+   align-items: center;
+   gap: 1.5rem; /* Space between main nav words */
+   /* Optional: Add margin if needed e.g., margin-left: 2rem; */
+}
+
+
+/* --- Navbar Button Hover/Focus Styles --- */
+/* Remove background change on hover */
+.navbar button:hover,
+.navbar button:focus { /* Apply effect on hover and keyboard focus */
+  background-color: transparent; /* Ensure no background on hover/focus */
+  /* Add a different visual cue, like underline */
+  text-decoration: underline;
+  color: #e0e0e0; /* Optional: Slightly lighter color on hover/focus */
+  outline: none; /* Remove default focus outline if adding custom style */
+}
+/* Apply to all headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Minolta', sans-serif; /* Add fallback */
+}
+
+/* Apply only to navbar buttons */
+.navbar button {
+  font-family: 'Minolta', sans-serif;
+  font-size: 1.1rem; /* Example */
+}
+.navbar p {
+  font-family: 'Minolta', sans-serif;
+
+}
+
+/* Apply to the text within the About section */
+.about-content p {
+   font-family: 'Minolta', serif; /* Example with different fallback */
+   line-height: 1.6;
+}
+
+.sound-gear-content li {
+   font-family: 'Minolta', serif; /* Example with different fallback */
+   line-height: 1.6;
+}
+
+.gallery-content p {
+   font-family: 'Minolta', serif; /* Example with different fallback */
+   line-height: 1.6;
+}
+
+/* Section Base Styles */
+.section {
+  min-height: 100vh; /* Make each section take full viewport height */
+  padding: 60px 20px 20px 20px; /* Add padding (top padding accounts for sticky navbar height) */
+  box-sizing: border-box;
+  display: flex; /* Use flexbox for alignment within sections */
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Needed for absolute positioning of overlays */
+  overflow: hidden; /* Hide overflow */
+}
+
+/* Photo Tint Styling */
+.photo-container {
+  position: relative; /* Container for positioning the overlay */
+  display: inline-block; /* Adjust as needed */
+  line-height: 0; /* Prevent extra space below image */
+}
+
+.photo-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Place tint above the image */
+  pointer-events: none; /* Allow clicks to pass through the tint */
+}
+
+.photo-container img {
+  display: block; /* Remove extra space below image */
+  max-width: 100%;
+  height: auto;
+  position: relative; /* Needed if you want to stack text on top directly */
+  z-index: 0; /* Below the tint */
+}
+
+
+
+/* Add or modify this rule specifically for .about-section */
+.about-section {
+  /* Override the default min-height from the .section rule */
+  min-height: auto; /* Allows height to be determined by content */
+
+  /* Keep other specific styles for the about section */
+  display: flex;
+  align-items: center; /* Keep vertical alignment */
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+
+  box-sizing: border-box; /* Ensure padding is included correctly */
+  /* Remove overflow: hidden; if it prevents seeing content correctly, though unlikely needed here */
+}
+
+/* Keep your existing rules for .about-content and .about-photo */
+.about-content {
+  flex: 1;
+  flex-basis: 55%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.about-photo {
+  flex-basis: 35%;
+  min-width: 250px;
+  max-width: 450px;
+}
+
+.about-photo img {
+   width: 100%;
+   height: auto;
+   object-fit: cover;
+   display: block;
+}
+
+/* Sound Gear Section */
+.sound-gear-section {
+  background-size: cover; /* Cover the entire section */
+  background-position: center;
+  background-repeat: no-repeat;
+  justify-content: flex-start; /* Align content to the left */
+  align-items: center;
+  color: white; /* Ensure text is white */
+  position: relative; /* Needed for the overlay */
+}
+
+/* Tint overlay specifically for background images */
+.sound-gear-section .background-tint-overlay {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+
+.sound-gear-content {
+  background-color: rgba(50, 113, 249, 0.5); /* Semi-transparent background for readability */
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 40%; /* Limit width of text block */
+  margin-left: 5%; /* Add some margin from the left edge */
+  text-align: left;
+  z-index: 2; /* Place text above the tint overlay */
+  position: relative; /* Ensure z-index works */
+}
+
+/* === Updated App.css rules for Gallery Section === */
+
+.gallery-section {
+  position: relative; /* Needed for absolute positioning of children */
+  overflow: hidden; /* Hide anything that might spill out */
+  display: flex; /* Use flex to position the text area */
+  /* Align text block to the start (left) of the container */
+  justify-content: flex-start;
+  /* Keep text block vertically centered */
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a; /* Fallback background */
+  /* Add padding on the left so text isn't right at the edge */
+  padding-left: 5%;
+  /* Adjust right padding if needed, keep top/bottom */
+  padding-right: 5%;
+  padding-top: 60px;
+  padding-bottom: 20px;
+  box-sizing: border-box; /* Include padding in height calculation */
+}
+
+/* --- Keep .gallery-background and .gallery-bg-img rules as they were --- */
+.gallery-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Background layer */
+}
+.gallery-bg-img {
+  position: absolute; /* Position each image within the background container */
+  overflow: hidden; /* Hide overflow within the container */
+}
+
+
+.gallery-bg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure images cover their area */
+  display: block;
+}
+.bg-left-top { top: 0; left: 0; width: 50%; height: 50%; }
+.bg-left-bottom { top: 50%; left: 0; width: 50%; height: 50%; }
+.bg-right { top: 0; left: 50%; width: 50%; height: 100%; }
+/* --- End of unchanged background rules --- */
+
+
+/* Text Area Styling */
+.gallery-text-area {
+  position: relative; /* Position relative to the flex container */
+  z-index: 1; /* Ensure text is above the background */
+  background-color: rgba(50, 113, 249, 0.5);
   color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  /* Adjust max-width if needed, maybe slightly less than 50% */
+  max-width: 40%;
+  /* Align text inside the box to the left */
+  text-align: left;
+  /* Remove margin-left if previously added, rely on section padding */
+  margin-left: 0;
 }
 
-.App-link {
-  color: #61dafb;
+/* Positioning the background images */
+.bg-left-top {
+  top: 0;
+  left: 0;
+  width: 50%; /* Left half */
+  height: 50%; /* Top half */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.bg-left-bottom {
+  top: 50%; /* Start halfway down */
+  left: 0;
+  width: 50%; /* Left half */
+  height: 50%; /* Bottom half */
+}
+
+.bg-right {
+  top: 0;
+  left: 50%; /* Start halfway across */
+  width: 50%; /* Right half */
+  height: 100%; /* Full height */
+}
+
+/* Text Area Styling */
+.gallery-text-area {
+  font-family: 'Minolta', serif; /* Example with different fallback */
+  position: relative; /* Position relative to the flex container */
+  z-index: 1; /* Ensure text is above the background */
+  background-color: rgba(50, 113, 249, 0.5);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  max-width: 40%; /* Limit width */
+  text-align: center;
+}
+
+.language-switcher {
+  margin-left: auto; /* This keeps it pushed to the far right */
+  /* ... existing internal language switcher styles ... */
+}
+
+/* Contact Section */
+.contact-section {
+  background-color: #3270f9; /* Explicitly set background */
+  flex-direction: column; /* Stack content vertically */
+}
+
+/* Responsive Adjustments (Example) */
+@media (max-width: 768px) {
+  .section {
+    padding-top: 80px; /* Adjust padding for smaller screens */
+     min-height: auto; /* Allow sections to be shorter than viewport */
+     padding-bottom: 40px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .navbar {
+    padding: 3rem;
+    gap: 2rem;
   }
+   .navbar button {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+   }
+
+  .about-section {
+    flex-direction: column; /* Stack text and photo */
+    text-align: center;
+    gap: 1.5rem; /* Adjust gap for stacked layout */
+}
+/* Reset basis when stacked if needed, or adjust widths */
+  .about-content {
+    flex-basis: auto;
+    width: 90%; /* Adjust width */
+    order: 1; /* Ensure text comes first if desired */
+}
+  .about-photo {
+    flex-basis: auto;
+    width: 80%; /* Adjust width */
+    max-width: 350px; /* Adjust max width */
+    order: 2; /* Ensure photo comes second */
+}
+
+
+  .sound-gear-content {
+    max-width: 80%; /* Allow more width */
+    margin-left: 0; /* Center it */
+    margin: 1rem auto;
+  }
+
+  .gallery-background {
+    position: static; /* Remove absolute positioning */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto; /* Adjust height automatically */
+ }
+  .gallery-bg-img {
+    position: static; /* Remove absolute positioning */
+    width: 100%;
+    height: 33.3vh; /* Give each roughly a third of viewport height */
+    min-height: 250px; /* Minimum height */
+ }
+  .gallery-section {
+  padding-left: 5%; /* Reset padding if needed */
+  padding-right: 5%;
+  /* Other stacking rules... */
+  flex-direction: column;
+  justify-content: center; /* Center items vertically when stacked */
+}
+  .gallery-text-area {
+  max-width: 50%; /* Adjust width */
+  text-align: center; /* Center text again for stacked view maybe? Or keep left */
+  margin: 2rem auto; /* Center block horizontally */
+  order: -1; /* Keep text first */
+}
+
+ /* Hide the background container if stacking this way */
+  .gallery-section .gallery-background {
+     order: 1;
+  }
+
+ /* Ensure the absolute positioning styles are removed/overridden */
+ .bg-left-top, .bg-left-bottom, .bg-right {
+     top: auto;
+     left: auto;
+     width: 100%;
+     height: 33.3vh; /* Or adjust as needed */
+     min-height: 250px;
+     position: static; /* Override absolute positioning */
+  }
+
+
 }
